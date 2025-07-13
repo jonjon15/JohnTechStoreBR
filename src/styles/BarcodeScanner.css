@@ -1,0 +1,367 @@
+/* Scanner de Código de Barras - Design Moderno */
+.barcode-scanner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.scanner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.scanner-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #00d4ff;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.scanner-content {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.scanner-camera {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scan-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-frame {
+  width: 200px;
+  height: 200px;
+  border: 3px solid #00d4ff;
+  border-radius: 12px;
+  position: relative;
+  animation: pulse 2s infinite;
+}
+
+.scan-frame::before,
+.scan-frame::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+
+.scan-frame::before {
+  top: -3px;
+  left: -3px;
+  border-top: 6px solid #ff6b6b;
+  border-left: 6px solid #ff6b6b;
+  border-radius: 12px 0 0 0;
+}
+
+.scan-frame::after {
+  bottom: -3px;
+  right: -3px;
+  border-bottom: 6px solid #ff6b6b;
+  border-right: 6px solid #ff6b6b;
+  border-radius: 0 0 12px 0;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7);
+  }
+  50% { 
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 10px rgba(0, 212, 255, 0);
+  }
+}
+
+.scan-instruction {
+  margin-top: 15px;
+  text-align: center;
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Estados de Erro */
+.scanner-error {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.scanner-error h4 {
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.scanner-error p {
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.error-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.retry-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+}
+
+.close-btn-secondary {
+  background: #f5f5f5;
+  color: #666;
+  border: 2px solid #ddd;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.close-btn-secondary:hover {
+  background: #e9e9e9;
+  border-color: #bbb;
+}
+
+/* Estado de Sucesso */
+.scan-success {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.success-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+.scan-success h4 {
+  color: #4CAF50;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.result-code {
+  background: #f0f8f0;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 25px;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  color: #2E7D32;
+  word-break: break-all;
+}
+
+.success-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 120px;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+.new-scan-btn {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 120px;
+}
+
+.new-scan-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(33, 150, 243, 0.3);
+}
+
+/* Dicas */
+.scanner-tips {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+  color: white;
+}
+
+.scanner-tips h5 {
+  margin: 0 0 15px 0;
+  color: #00d4ff;
+  font-size: 1rem;
+}
+
+.scanner-tips ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.scanner-tips li {
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 480px) {
+  .barcode-scanner-container {
+    padding: 10px;
+  }
+  
+  .scanner-content {
+    padding: 15px;
+  }
+  
+  .scanner-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .scan-frame {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .success-actions {
+    flex-direction: column;
+  }
+  
+  .search-btn,
+  .new-scan-btn {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .scanner-tips {
+    padding: 15px;
+  }
+}
+
+/* Tema Escuro */
+@media (prefers-color-scheme: dark) {
+  .scanner-content {
+    background: #2a2a2a;
+    color: white;
+  }
+  
+  .scan-instruction {
+    color: #ccc;
+  }
+  
+  .scanner-error p {
+    color: #ccc;
+  }
+  
+  .result-code {
+    background: #1a1a1a;
+    border-color: #4CAF50;
+    color: #81C784;
+  }
+}

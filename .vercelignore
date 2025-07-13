@@ -1,0 +1,34 @@
+# Ignore large files and unnecessary directories
+*.zip
+*.msi
+*.apk
+*.pdf
+jadx/
+jadx-1.5.2.zip
+public/
+node_modules/
+.git/
+*.log
+*.tmp
+*.temp
+
+# Specific large files to ignore
+JohnTechStoreBR.zip
+jadx-master.zip
+Apktool-master.zip
+node-v22.17.0-x64.msi
+*.xlsx
+*.webp
+*.jpg
+*.jpeg
+*.png
+!logo.png
+!logo.svg
+!mascote.png
+
+# Keep only essential files for deployment
+!index.html
+!api/
+!vercel.json
+!package.json
+!README.md

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Otimizado -->
+    <title>Preços - JohnTech Store BR | Gestão de Estoque Gratuita</title>
+    <meta name="description" content="Planos e preços do JohnTech Store BR. 100% gratuito para sempre, sem limitações. Gestão de estoque, scanner de código de barras e integração Bling.">
+    <meta name="keywords" content="gestão estoque grátis, preços gestão estoque, bling integração gratuita, scanner código barras web">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="JohnTech Store BR - 100% Gratuito Para Sempre">
+    <meta property="og:description" content="Gestão de estoque completa, scanner de código de barras e integração Bling. Tudo gratuito, sem limitações.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://johntechstore.vercel.app/pricing">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "JohnTech Store BR",
+        "applicationCategory": "BusinessApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL",
+            "availability": "https://schema.org/InStock"
+        },
+        "operatingSystem": "Web Browser",
+        "description": "Sistema de gestão de estoque gratuito com scanner de código de barras"
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #4CAF50;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: "RECOMENDADO";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #4CAF50;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .plan-description {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .features-list li::before {
+            content: "✅";
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .features-list li.not-available::before {
+            content: "❌";
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .comparison-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .comparison-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .comparison-table .johntech {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .comparison-table .competitor {
+            color: #ff5722;
+        }
+
+        .faq-section {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>💰 Preços JohnTech Store BR</h1>
+            <p>Gestão de estoque completa, 100% gratuita para sempre!</p>
+        </header>
+
+        <div class="pricing-grid">
+            <div class="pricing-card featured">
+                <h3 class="plan-name">🚀 Plano Completo</h3>
+                <div class="plan-price">
+                    GRÁTIS
+                    <span>/ para sempre</span>
+                </div>
+                <p class="plan-description">
+                    Todas as funcionalidades, sem limitações, sem anúncios!
+                </p>
+                <ul class="features-list">
+                    <li>Scanner de Código de Barras</li>
+                    <li>Integração Bling API Oficial</li>
+                    <li>Dashboard Analytics Completo</li>
+                    <li>Gestão Multi-Marketplace</li>
+                    <li>PWA - Funciona como App</li>
+                    <li>Acesso Multiplataforma</li>
+                    <li>Updates Automáticos</li>
+                    <li>Sem Limitação de Produtos</li>
+                    <li>Sem Limitação de Usuários</li>
+                    <li>Suporte da Comunidade</li>
+                </ul>
+                <button class="cta-button" onclick="startFree()">
+                    🎯 Começar Agora - 100% Grátis
+                </button>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="plan-name">📱 Apps Mobile</h3>
+                <div class="plan-price">
+                    R$ 29,90
+                    <span>/ mês</span>
+                </div>
+                <p class="plan-description">
+                    Preço típico de apps mobile concorrentes
+                </p>
+                <ul class="features-list">
+                    <li>Scanner Básico</li>
+                    <li>Integração Limitada</li>
+                    <li class="not-available">Só funciona no celular</li>
+                    <li class="not-available">Precisa instalar</li>
+                    <li class="not-available">Updates via loja</li>
+                    <li class="not-available">Anúncios inclusos</li>
+                    <li class="not-available">Limitações freemium</li>
+                    <li class="not-available">Suporte pago</li>
+                    <li class="not-available">Dependente de aprovação</li>
+                    <li class="not-available">Risco de remoção</li>
+                </ul>
+                <button class="cta-button" style="background: #ccc; cursor: not-allowed;" disabled>
+                    ❌ Por que pagar?
+                </button>
+            </div>
+        </div>
+
+        <div class="comparison-section">
+            <h2 class="comparison-title">📊 Comparação Detalhada</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Funcionalidade</th>
+                        <th>JohnTech Store BR</th>
+                        <th>Apps Mobile Típicos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>💰 Preço</strong></td>
+                        <td class="johntech">Grátis Para Sempre</td>
+                        <td class="competitor">R$ 29,90/mês</td>
+                    </tr>
+                    <tr>
+                        <td><strong>📱 Plataforma</strong></td>
+                        <td class="johntech">Web + PWA (Universal)</td>
+                        <td class="competitor">Mobile Only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>📲 Instalação</strong></td>
+                        <td class="johntech">Acesso Instantâneo</td>
+                        <td class="competitor">App Store Required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🔍 Scanner</strong></td>
+                        <td class="johntech">HTML5 Avançado</td>
+                        <td class="competitor">Básico</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🔧 Bling Integration</strong></td>
+                        <td class="johntech">API v3 Oficial</td>
+                        <td class="competitor">Limitada</td>
+                    </tr>
+                    <tr>
+                        <td><strong>📊 Analytics</strong></td>
+                        <td class="johntech">Dashboard Completo</td>
+                        <td class="competitor">Básico</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🔄 Updates</strong></td>
+                        <td class="johntech">Automático/Instant</td>
+                        <td class="competitor">Via App Store</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🎨 Customização</strong></td>
+                        <td class="johntech">Total (Open Source)</td>
+                        <td class="competitor">Limitada</td>
+                    </tr>
+                    <tr>
+                        <td><strong>💻 Multi-Dispositivo</strong></td>
+                        <td class="johntech">Desktop + Mobile + Tablet</td>
+                        <td class="competitor">Apenas Mobile</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🎯 Limitações</strong></td>
+                        <td class="johntech">Nenhuma</td>
+                        <td class="competitor">Freemium/Ads</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="faq-section">
+            <h2 class="faq-title">❓ Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">🤔 Como pode ser 100% gratuito?</div>
+                <div class="faq-answer">
+                    O JohnTech Store BR é um projeto open-source focado em democratizar a gestão de estoque. Não temos custos de App Store, servidores caros ou equipe comercial, permitindo oferecer tudo gratuitamente.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">🔒 Há alguma pegadinha ou custo oculto?</div>
+                <div class="faq-answer">
+                    Absolutamente não! É 100% gratuito, sem limitações, sem anúncios, sem versão premium. Você tem acesso a todas as funcionalidades sem pagar nada.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">📱 Funciona tão bem quanto apps nativos?</div>
+                <div class="faq-answer">
+                    Sim! Nossa tecnologia PWA oferece experiência idêntica a apps nativos, mas com vantagens: acesso universal, sem instalação, updates automáticos e funciona em qualquer dispositivo.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">🔍 O scanner funciona bem em navegadores?</div>
+                <div class="faq-answer">
+                    Perfeitamente! Usamos HTML5 e APIs modernas que oferecem performance igual ou superior a scanners nativos, sem precisar instalar nada.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">⚡ Como garantem que sempre será gratuito?</div>
+                <div class="faq-answer">
+                    É open-source! O código está disponível publicamente, garantindo transparência total. Mesmo que quiséssemos cobrar (não queremos), a comunidade pode manter a versão gratuita.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">🚀 Posso começar agora mesmo?</div>
+                <div class="faq-answer">
+                    Sim! Clique no botão abaixo e comece a usar imediatamente. Não precisa cadastro, cartão de crédito ou instalação. É só acessar e usar!
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <button class="cta-button" onclick="startFree()" style="font-size: 1.3rem; padding: 1.5rem 3rem;">
+                🎯 Começar Agora - 100% Gratuito Para Sempre!
+            </button>
+        </div>
+    </div>
+
+    <!-- Google Analytics 4 -->
+    <script src="../src/analytics/GoogleAnalytics.js"></script>
+
+    <script>
+        function startFree() {
+            // Track conversion
+            if (window.JohnTechAnalytics) {
+                window.JohnTechAnalytics.trackConversion('pricing_page_cta');
+                window.JohnTechAnalytics.trackCompetitiveAdvantage('free_forever');
+            }
+            
+            // Redirect to dashboard
+            window.location.href = '/dashboard.html';
+        }
+
+        // Track page view
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.JohnTechAnalytics) {
+                window.JohnTechAnalytics.trackPageView('Pricing Page');
+                window.JohnTechAnalytics.trackCompetitorComparison('pricing', 'free_vs_paid');
+            }
+        });
+
+        // Track scroll depth
+        let maxScroll = 0;
+        window.addEventListener('scroll', () => {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+                
+                if (window.JohnTechAnalytics && [25, 50, 75, 100].includes(scrollPercent)) {
+                    window.JohnTechAnalytics.trackEngagement(`scroll_${scrollPercent}percent`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

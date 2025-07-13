@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JohnTech Store BR - Gestão de Estoque Web Gratuita | Melhor que Apps Mobile</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Sistema web GRATUITO de gestão de estoque com Bling API, scanner de códigos e relatórios BI. Use de qualquer dispositivo sem instalar app. Superior aos apps mobile tradicionais.">
+    <meta name="keywords" content="gestão estoque web, bling api, scanner código barras online, sistema estoque gratuito, dashboard estoque web, melhor que apps mobile">
+    <meta name="author" content="JohnTech Store BR">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://johntechstore.vercel.app/">
+    <meta property="og:title" content="JohnTech Store BR - Sistema Web de Gestão de Estoque GRATUITO">
+    <meta property="og:description" content="Use de qualquer dispositivo, sem instalar app! Scanner de códigos, Bling API, relatórios BI completos. 100% gratuito sempre.">
+    <meta property="og:image" content="https://johntechstore.vercel.app/public/icons/icon-512x512.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://johntechstore.vercel.app/">
+    <meta property="twitter:title" content="JohnTech Store BR - Solução Web Superior aos Apps Mobile">
+    <meta property="twitter:description" content="Sistema web completo: Scanner QR, Bling API, BI avançado. Sem instalar app, sem ads, sem limitações!">
+    <meta property="twitter:image" content="https://johntechstore.vercel.app/public/icons/icon-512x512.png">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#3182ce">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="JohnTech Store">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="public/icons/favicon.svg">
+    <link rel="apple-touch-icon" href="public/icons/apple-touch-icon.svg">
+    <link rel="mask-icon" href="public/icons/icon-192x192.svg" color="#3182ce">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #3182ce;
+            --secondary-color: #667eea;
+            --accent-color: #00d4ff;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-bg: #1a202c;
+            --light-bg: #f7fafc;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23a)"/><circle cx="800" cy="600" r="200" fill="url(%23a)"/></svg>');
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(135deg, var(--accent-color), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .feature-icon {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, white, #f1f5f9);
+            color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-preview {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-preview:hover {
+            transform: perspective(1000px) rotateY(-10deg) rotateX(2deg) scale(1.05);
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 5rem 2rem;
+            background: var(--light-bg);
+        }
+
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .vs-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .vs-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .vs-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .vs-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 0;
+        }
+
+        .vs-row {
+            display: contents;
+        }
+
+        .vs-cell {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vs-cell:nth-child(3n-2) {
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .vs-cell:nth-child(3n-1) {
+            text-align: center;
+            justify-content: center;
+            background: #fef2f2;
+            color: var(--danger-color);
+        }
+
+        .vs-cell:nth-child(3n) {
+            text-align: center;
+            justify-content: center;
+            background: #f0fdf4;
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        .check-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #2d3748 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .final-cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .dashboard-preview {
+                transform: none;
+                margin-top: 2rem;
+            }
+
+            .vs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vs-cell {
+                text-align: left !important;
+                justify-content: flex-start !important;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-dots {
+            display: inline-flex;
+            gap: 4px;
+            margin-left: 8px;
+        }
+
+        .loading-dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: loading 1.4s ease-in-out infinite both;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes loading {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    Sistema de Estoque 
+                    <span class="hero-highlight">Web Gratuito</span>
+                    para Sua Empresa
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Use de qualquer dispositivo, sem instalar app! Scanner de códigos, integração Bling API e relatórios BI completos. 
+                    <strong>Superior aos aplicativos mobile tradicionais.</strong>
+                </p>
+
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🌐</div>
+                        <span>Acesso universal - qualquer dispositivo, qualquer hora</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💰</div>
+                        <span>100% gratuito sempre - sem ads, sem limitações</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📷</div>
+                        <span>Scanner QR/código de barras integrado</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔗</div>
+                        <span>Integração oficial Bling API v3</span>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="dashboard.html" class="btn btn-primary">
+                        🚀 Começar Agora Grátis
+                    </a>
+                    <a href="#comparison" class="btn btn-secondary">
+                        📊 Ver Vantagens vs Apps Mobile
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <img src="public/icons/chip-logo-light.svg" alt="JohnTech Store Dashboard Preview" class="dashboard-preview">
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison" class="comparison">
+        <div class="comparison-container">
+            <h2 class="section-title">JohnTech Store vs Apps Mobile</h2>
+            <p class="section-subtitle">
+                Descubra por que nossa solução web é superior aos aplicativos mobile tradicionais
+            </p>
+
+            <div class="vs-table">
+                <div class="vs-header">
+                    <h3>🆚 Comparação Detalhada</h3>
+                    <p>Veja as vantagens de escolher uma solução web moderna</p>
+                </div>
+
+                <div class="vs-grid">
+                    <div class="vs-row">
+                        <div class="vs-cell"><strong>Funcionalidade</strong></div>
+                        <div class="vs-cell"><strong>Apps Mobile</strong></div>
+                        <div class="vs-cell"><strong>JohnTech Store (Web)</strong></div>
+                    </div>
+
+                    <div class="vs-row">
+                        <div class="vs-cell">📱 Acesso e Instalação</div>
+                        <div class="vs-cell">❌ Precisa instalar app</div>
+                        <div class="vs-cell">✅ <span class="check-icon">🌐</span> Instant access</div>
+                    </div>
+
+                    <div class="vs-row">
+                        <div class="vs-cell">💰 Custo</div>
+                        <div class="vs-cell">❌ Freemium + Ads</div>
+                        <div class="vs-cell">✅ <span class="check-icon">🆓</span> 100% Gratuito</div>
+                    </div>
+
+                    <div class="vs-row">
+                        <div class="vs-cell">📷 Scanner Código de Barras</div>
+                        <div class="vs-cell">✅ Scanner nativo</div>
+                        <div class="vs-cell">✅ <span class="check-icon">📱</span> Scanner web</div>
+                    </div>
+
+                    <div class="vs-row">
+                        <div class="vs-cell">🔗 Integração Bling</div>
+                        <div class="vs-cell">✅ API integrada</div>
+                        <div class="vs-cell">✅ <span class="check-icon">🚀</span> API v3 Oficial</div>
+                    </div>
+
+                    <div class="vs-row">
+                        <div class="vs-cell">🎨 Personalização</div>
+                        <div class="vs-cell">❌ Interface fixa</div>
+                        <div class="vs-cell">✅ <span class="check-icon">🎨</span> Temas + Logos</div>
+                    </div>
+
+                    <div class="vs-row">
+                        <div class="vs-cell">📊 Relatórios BI</div>
+                        <div class="vs-cell">❌ Limitado mobile</div>
+                        <div class="vs-cell">✅ <span class="check-icon">📈</span> Dashboard completo</div>
+                    </div>
+
+                    <div class="vs-row">
+                        <div class="vs-cell">💻 Multi-dispositivo</div>
+                        <div class="vs-cell">❌ Só mobile</div>
+                        <div class="vs-cell">✅ <span class="check-icon">💻</span> PC + Tablet + Mobile</div>
+                    </div>
+
+                    <div class="vs-row">
+                        <div class="vs-cell">⚡ Performance</div>
+                        <div class="vs-cell">✅ App nativo</div>
+                        <div class="vs-cell">✅ <span class="check-icon">⚡</span> PWA otimizada</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <h2 class="section-title">Por que Escolher Nossa Solução Web?</h2>
+            <p class="section-subtitle">
+                Recursos exclusivos que apps mobile não conseguem oferecer
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-card-icon">🌐</div>
+                    <h3>Acesso Universal</h3>
+                    <p>Use de qualquer dispositivo com internet. PC, tablet, celular - funciona em todos! Não precisa instalar nada.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon">💰</div>
+                    <h3>Sempre Gratuito</h3>
+                    <p>Sem mensalidades, sem ads, sem limitações. Open source e mantido pela comunidade para sempre.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon">📊</div>
+                    <h3>BI Avançado</h3>
+                    <p>Relatórios completos, gráficos interativos e dashboards que apps mobile não conseguem fazer direito.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon">🎨</div>
+                    <h3>Totalmente Personalizável</h3>
+                    <p>Mude temas, cores, logos, interface. Deixe do jeito da sua empresa. Apps têm interface fixa.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon">🔗</div>
+                    <h3>Multi-Integração</h3>
+                    <p>Bling API, marketplaces, outros ERPs. Expansível para qualquer sistema que sua empresa use.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon">⚡</div>
+                    <h3>PWA Moderna</h3>
+                    <p>Performance de app nativo, mas com flexibilidade web. Funciona offline e é super rápida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="final-cta-container">
+            <h2>Pronto para Revolucionar sua Gestão de Estoque?</h2>
+            <p>
+                Experimente agora mesmo! Sem cadastro, sem instalação, sem complicação. 
+                Comece a usar em 30 segundos.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="dashboard.html" class="btn btn-primary" onclick="trackConversion('start_now')">
+                    🚀 Começar Agora
+                    <div class="loading-dots" style="display: none;">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <a href="test-scanner.html" class="btn btn-secondary">
+                    📷 Testar Scanner
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics & Scripts -->
+    <script>
+        // Tracking de conversões
+        function trackConversion(action) {
+            console.log('🎯 Conversão:', action);
+            
+            // Google Analytics (placeholder)
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'event_category': 'cta',
+                    'event_label': action
+                });
+            }
+            
+            // Feedback visual
+            const button = event.target;
+            const loadingDots = button.querySelector('.loading-dots');
+            
+            if (loadingDots) {
+                loadingDots.style.display = 'inline-flex';
+                setTimeout(() => {
+                    loadingDots.style.display = 'none';
+                }, 1000);
+            }
+        }
+
+        // Smooth scrolling para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animação de entrada para elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar cards de features
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        console.log('🚀 JohnTech Store Landing Page carregada!');
+        console.log('💡 Solução web superior aos apps mobile tradicionais');
+    </script>
+</body>
+</html>
